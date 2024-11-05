@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(this.name, this.icon, this.color);
 }
 
 class ItemCard extends StatelessWidget {
@@ -27,6 +28,7 @@ class ItemCard extends StatelessWidget {
             );
         },
         child: Container(
+          color: item.color,
           padding: const EdgeInsets.all(8),
           child: Center(
             child: Column(
@@ -59,9 +61,9 @@ class MyHomePage extends StatelessWidget {
     final String className = 'PBP F';
 
     final List<ItemHomepage> items = [
-         ItemHomepage("Lihat Daftar Produk", Icons.mood),
-         ItemHomepage("Tambah Produk", Icons.add),
-         ItemHomepage("Logout", Icons.logout),
+         ItemHomepage("Lihat Daftar Produk", Icons.mood, Colors.black),
+         ItemHomepage("Tambah Produk", Icons.add, Colors.red),
+         ItemHomepage("Logout", Icons.logout, Colors.yellow),
      ];
 
     MyHomePage({super.key});
@@ -71,13 +73,13 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Mental Health Tracker',
+          'Asadel Store Mobile',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.grey.shade500,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
