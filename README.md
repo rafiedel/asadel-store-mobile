@@ -37,10 +37,16 @@ Keduanya dipakai untuk sesuatu yang tidak berubah. Tetapi kalau dilihat dari tug
 ### A. Keyword *const*
 Keyword *const* digunakan untuk membuat objek menjadi *immutable* (tidak dapat diubah) saat proses kompilasi. Dengan demikian, objek yang bersifat statis tidak perlu dibangun ulang setiap kali program berjalan, yang dapat menghemat penggunaan memori dan meningkatkan performa aplikasi. Namun, *const* sebaiknya tidak digunakan pada objek yang bersifat dinamis karena tidak mendukung perubahan.
 ### B. *Column* dan *Row*
-Keduanya adalah widget yang berfungsi untuk me-*wrap* beberapa widget dalam satu arah. Perbedaannya, *Column* menata widget secara vertikal, sedangkan *Row* menata widget secara horizontal. Contoh penggunaan *Column* dapat dilihat di `moodentry_form.dart` pada baris 152, dan *Row* pada `menu.dart` di baris 42.
+Keduanya adalah widget yang berfungsi untuk me-*wrap* beberapa widget dalam satu arah. Perbedaannya, *Column* menata widget secara vertikal, sedangkan *Row* menata widget secara horizontal. Contoh penggunaan *Column* dapat dilihat di `item_form.dart` pada baris 152, dan *Row* pada `menu.dart` di baris 42.
 ### C. Element Input pada Tugas
 Pada tugas ini, elemen input yang digunakan meliputi *Form* dan *TextFormField*. Selain itu, terdapat juga elemen lain seperti *DropdownButtonFormField*, *SearchField*, *DatePicker*, dan beberapa elemen input lainnya.
 ### D. Theme pada Flutter dan Tugas
 Konfigurasi *theme* di Flutter dilakukan dengan meletakkan `ThemeData` pada field `theme` di `MaterialApp`. Jika ingin menggunakan warna yang ada di tema tersebut, cukup tambahkan `Theme.of(context).<warna yang diinginkan>` pada field yang membutuhkan objek *Color*. Pada tugas ini, penggunaan tema dapat dilihat di file `mood_card` pada baris 23.
 ### E. Navigasi di Flutter
 Navigasi antar halaman di Flutter dapat diatur dengan menggunakan tombol-tombol yang masing-masing memiliki fungsi `Navigator.push` untuk berpindah ke halaman/widget tertentu. Selain `Navigator.push`, terdapat metode lain seperti `pushReplacement` untuk menggantikan halaman saat ini dan `pop` untuk kembali ke halaman sebelumnya, yang dapat digunakan sesuai kebutuhan.
+### F. Cara Implementasi Checklist
+1. Membuat *screen* atau *page* `item_form.dart` yang berisi *input field* seperti *name*, *price*, *description*, dan *stock available*, serta sebuah tombol untuk menyimpan (*save*). Logikanya, setiap *field* akan divalidasi, dan jika lolos, datanya ditampilkan di *AlertDialog*.
+2. Membuat folder `screens` untuk menyimpan `item_form.dart` dan `menu.dart`.
+3. Menambahkan *drawer* di `left_drawer.dart` yang berfungsi untuk *routing* ke halaman `main.dart` dan `item_form.dart`, lalu menghubungkan *drawer* ini ke kedua halaman agar dapat diakses dari keduanya.
+4. Melakukan *refactor* pada `main.dart` dengan memindahkan `ItemCard` dan `ItemHomePage` ke file `mood_card.dart`.
+5. Membuat folder `widgets` untuk menyimpan `left_drawer.dart` dan `mood_card.dart`.
