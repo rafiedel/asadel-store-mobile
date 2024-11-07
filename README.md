@@ -2,7 +2,8 @@
 
 ## Daftar Isi
 - [Identitas Mahasiswa](#identitas-mahasiswa)
-- [Tugas Individu  7: Elemen Dasar Flutter](#tugas-7-elemen-dasar-flutter)
+- [Tugas Individu 7: Elemen Dasar Flutter](#tugas-individu-7-elemen-dasar-flutter)
+- [Tugas Individu 8: Flutter Navigation, Layouts, Forms, and Input Elements](#tugas-individu-8-flutter-navigation-layouts-forms-and-input-elements)
 
 ## Identitas Mahasiswa
 
@@ -10,7 +11,7 @@
 **NPM**: 2306245485  
 **Kelas**: PBP - F
 
-## Tugas 7: Elemen Dasar Flutter
+## Tugas Individu 7: Elemen Dasar Flutter
 
 ### A. Stateless Widget dan Stateful Widget
 Stateless Widget adalah class Widget yang tidak dapat merubah value/field/passing argument nya. Sedangkan, Stateful Widget adalah class Widget yang dapat merubah value/field/passing argument dengan menggunakan setState()
@@ -32,7 +33,7 @@ Keduanya dipakai untuk sesuatu yang tidak berubah. Tetapi kalau dilihat dari tug
 6. Membuat InfoCard sebagai identitas mahasiswa
 7. Mengubah MyHomePage menjadi Stateless Widget dengan menampilkan InfoCard berisi npm,nama, dan kelas BESERTA ItemCard yang berisi Lihat Daftar Produk, Tambah Produk, dan Logout
 
-## Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements
+## Tugas Individu 8: Flutter Navigation, Layouts, Forms, and Input Elements
 
 ### A. Keyword *const*
 Keyword *const* digunakan untuk membuat objek menjadi *immutable* (tidak dapat diubah) saat proses kompilasi. Dengan demikian, objek yang bersifat statis tidak perlu dibangun ulang setiap kali program berjalan, yang dapat menghemat penggunaan memori dan meningkatkan performa aplikasi. Namun, *const* sebaiknya tidak digunakan pada objek yang bersifat dinamis karena tidak mendukung perubahan.
