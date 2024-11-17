@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:asadel_store_mobile/widgets/left_drawer.dart';
-import 'package:asadel_store_mobile/widgets/mood_card.dart';
+import 'package:asadel_store_mobile/widgets/product_card.dart';
 
 class MyHomePage extends StatelessWidget {
     final String npm = '2306245485'; // NPM
@@ -8,7 +8,7 @@ class MyHomePage extends StatelessWidget {
     final String className = 'PBP F'; // Kelas
 
     final List<ItemHomepage> items = [
-         ItemHomepage("Lihat Daftar Produk", Icons.mood, Colors.black),
+         ItemHomepage("Lihat Daftar Produk", Icons.shopping_bag_outlined, Colors.black),
          ItemHomepage("Tambah Produk", Icons.add, Colors.red),
          ItemHomepage("Logout", Icons.logout, Colors.yellow),
      ];

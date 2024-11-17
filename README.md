@@ -4,6 +4,7 @@
 - [Identitas Mahasiswa](#identitas-mahasiswa)
 - [Tugas Individu 7: Elemen Dasar Flutter](#tugas-individu-7-elemen-dasar-flutter)
 - [Tugas Individu 8: Flutter Navigation, Layouts, Forms, and Input Elements](#tugas-individu-8-flutter-navigation-layouts-forms-and-input-elements)
+- [Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter](#tugas-9-integrasi-layanan-web-django-dengan-aplikasi-flutter)
 
 ## Identitas Mahasiswa
 
@@ -51,3 +52,26 @@ Navigasi antar halaman di Flutter dapat diatur dengan menggunakan tombol-tombol 
 3. Menambahkan *drawer* di `left_drawer.dart` yang berfungsi untuk *routing* ke halaman `main.dart` dan `item_form.dart`, lalu menghubungkan *drawer* ini ke kedua halaman agar dapat diakses dari keduanya.
 4. Melakukan *refactor* pada `main.dart` dengan memindahkan `ItemCard` dan `ItemHomePage` ke file `mood_card.dart`.
 5. Membuat folder `widgets` untuk menyimpan `left_drawer.dart` dan `mood_card.dart`.
+
+## Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter
+
+### A. Pentingnya Model
+Model digunakan untuk mengorganisir data yang diterima dari backend menjadi satu kesatuan objek yang terstruktur. Dengan menambahkan metode *factory* `fromJson` dan `toJson`, frontend dapat dengan mudah mengambil dan mengirim data objek ke backend. Tanpa model, meskipun aplikasi tetap dapat berjalan, pengelolaan data akan menjadi lebih sulit karena data yang diterima hanya berupa struktur `Map`, sehingga kurang terstruktur dan rentan terhadap kesalahan saat mengolah data.
+### B. Library http
+Library `http` dalam Flutter berfungsi untuk berkomunikasi dengan server/backend, baik yang berada di internet maupun *localhost*. Dalam tugas ini, `http` digunakan bersama *CookiesRequest* yang disediakan oleh library `pbp_django_auth` untuk berinteraksi dengan *endpoint* seperti login, register, logout, mengambil data produk, dan menambah produk.
+### C. CookiesRequest
+`CookiesRequest` adalah komponen dari library `pbp_django_auth` yang membantu dalam berkomunikasi dengan backend menggunakan protokol HTTP serta menyimpan *cookies* di *local storage* menggunakan `shared_preferences`. Oleh karena itu, `CookiesRequest` didistribusikan ke semua *screen* agar mahasiswa dapat dengan mudah berkomunikasi dengan backend, memanfaatkan berbagai komponen yang disediakan.
+### D. Mekanisme Pengiriman-Pengambilan Data
+Dalam tugas ini, mekanisme pengiriman dan pengambilan data diterapkan di `product_form.dart` dan `list_product.dart`. Setelah semua input di `product_form.dart` terisi, pengguna dapat mengklik tombol *Save* untuk mengirimkan data melalui *body* request ke endpoint `create-flutter/`, dengan menyertakan informasi bahwa pengirim adalah pengguna tersebut.  
+Sementara itu, pengambilan data produk diimplementasikan di `list_product.dart` dengan mengirimkan permintaan ke endpoint `json/`, beserta informasi tambahan bahwa permintaan dilakukan oleh pengguna tersebut.
+### E. Mekanisme Autentikasi
+Dalam tugas ini, mekanisme autentikasi diterapkan di `login.dart`, `register.dart`, dan `menu.dart`. Di `login.dart`, data berupa *username* dan *password* dikirimkan ke endpoint `auth/logout/`. Dari permintaan ini, server akan memberikan respon berupa *cookies* yang kemudian disimpan di *local storage* menggunakan `shared_preferences`.  
+Di `register.dart`, data yang dikirim berupa *username*, *password1*, dan *password2* dikirim ke endpoint `auth/register/`. Jika respon permintaan berhasil, pengguna akan diarahkan ke halaman login.  
+Untuk mekanisme logout di `menu.dart`, ketika pengguna menekan tombol logout, aplikasi akan mengirimkan permintaan ke endpoint `auth/logout/`, yang akan menghapus *cookies* di *local storage* dan menandai pengguna tersebut sebagai tidak aktif atau logout di sisi server/backend.
+### F. Cara Implementasi Checklist
+1. Membuat endpoint baru di [asadel-store](https://github.com/rafiedel/asadel-store) untuk mengatur login, register, logout, dan membuat data produk baru agar dapat digunakan oleh aplikasi Flutter.
+2. Membuat model `Product` di `product.dart` menggunakan QuickType.io.
+3. Membuat screen dan logika autentikasi awal (login dan register) di `login.dart` dan `register.dart`.
+4. Membuat screen dan logika untuk mengambil semua data produk yang terhubung dengan pengguna di `list_product.dart`, kemudian membuat screen `detail_product` yang terhubung ke produk satu per satu dari `list_product.dart` dengan mengirimkan objek *fields* dari produk tersebut.
+5. Mengupdate screen `product_form.dart` agar terintegrasi dengan endpoint backend untuk pembuatan produk baru.
+6. Mengupdate `left_drawer.dart` dan `menu.dart` untuk menavigasi ke screen `list_product.dart`, serta menambahkan fitur logout untuk kembali ke halaman login.

@@ -1,6 +1,7 @@
+import 'package:asadel_store_mobile/screens/list_product.dart';
 import 'package:flutter/material.dart';
 import 'package:asadel_store_mobile/screens/menu.dart';
-import 'package:asadel_store_mobile/screens/item_form.dart';
+import 'package:asadel_store_mobile/screens/product_form.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -17,7 +18,7 @@ class LeftDrawer extends StatelessWidget {
             child: const Column(
               children: [
                 Text(
-                  'Mental Health Tracker',
+                  'Asadel Store Mobile',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -27,7 +28,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Text(
-                  "Ayo jaga kesehatan mentalmu setiap hari disini!",
+                  "Ayo berbelanja sesuka hati dan bersenang ria yey yey yey!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
@@ -50,12 +51,22 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.mood),
+            leading: const Icon(Icons.add_shopping_cart_sharp),
             title: const Text('Tambah Item'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) => const MoodEntryFormPage(),
+                builder: (context) => const ProductFormPage(),
               ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_bag_outlined),
+            title: const Text('Daftar Produk'),
+            onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductPage()),
+                  );
             },
           ),
         ],

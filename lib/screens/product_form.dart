@@ -1,14 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:asadel_store_mobile/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
-class MoodEntryFormPage extends StatefulWidget {
-  const MoodEntryFormPage({super.key});
+import 'menu.dart';
+
+class ProductFormPage extends StatefulWidget {
+  const ProductFormPage({super.key});
 
   @override
-  State<MoodEntryFormPage> createState() => _MoodEntryFormPageState();
+  State<ProductFormPage> createState() => _ProductFormPageState();
 }
 
-class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
+class _ProductFormPageState extends State<ProductFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
 	int _price = 0;
@@ -17,6 +23,8 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -142,37 +150,36 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
                       backgroundColor: MaterialStateProperty.all(
                           Colors.grey.shade700),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Mood berhasil tersimpan'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Name: $_name'),
-                                    Text("Price: $_price"),
-                                    Text("Description: $_description"),
-                                    Text("Stock Available: $_stock_available")
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                  },
-                                ),
-                              ],
+                            final response = await request.postJson(
+                                "http://10.0.2.2:8000/create-flutter/",
+                                jsonEncode(<String, String>{
+                                    'name': _name.toString(),
+                                    'price': _price.toString(),
+                                    'description': _description.toString(),
+                                    'stock_available' : _stock_available.toString(),
+                                }),
                             );
-                          },
-                        );
-                      }
+                            if (context.mounted) {
+                                if (response['status'] == 'success') {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                    content: Text("Produk baru berhasil disimpan!"),
+                                    ));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                                    );
+                                } else {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                        content:
+                                            Text("Terdapat kesalahan, silakan coba lagi."),
+                                    ));
+                                }
+                            }
+                        }
                     },
                     child: const Text(
                       "Save",
